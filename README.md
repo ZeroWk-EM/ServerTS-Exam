@@ -1,7 +1,7 @@
 # [EVENT] - EXAM
 
 1. Install dependance with `npm i`
-2. Create .env file and fill the value OR use this template
+2. Create .env (or use existing) file and fill the value OR use this template
 
 ```
 PORT=5000
