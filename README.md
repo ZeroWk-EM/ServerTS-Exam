@@ -6,8 +6,6 @@
 ```
 PORT=5000
 MONGO_URL=mongodb://127.0.0.1:27017/ticketZero
-SECRET_JWT=M6EGW8sAGq4gquTd62Mo
-SALT_ROUND=10
 ```
 
 ### SCRIPT
