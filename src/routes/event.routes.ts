@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { body, header } from "express-validator";
 import {
+  checkBodyValid,
   checkErrors,
   checkIdValid,
   uniqueBuyer,
@@ -93,23 +94,31 @@ router.get("/:id/tickets", checkIdValid, checkErrors, async (req, res) => {
 });
 
 // UPDATE EVENT
-router.put("/:id", checkIdValid, checkErrors, async ({ body }, res) => {
-  const id = res.locals.id;
-  const eventToUpdate: IEvent = body;
-  try {
-    const updateDoc = await Event.findByIdAndUpdate(
-      id,
-      {
-        $set: eventToUpdate,
-      },
-      { new: true, runValidators: true, useFindAndModify: false }
-    );
-    if(updateDoc) return res.status(200).send(updateDoc);
-    res.status(400).json({messge:"Event to update not found, wrong or invalid ID"});
-  } catch (error) {
-    return res.status(400).json({ error: "MISSING REQUIRED FIELD" });
+router.put(
+  "/:id",
+  checkIdValid,
+  checkErrors,
+  checkBodyValid,
+  async ({ body }, res) => {
+    const id = res.locals.id;
+    const eventToUpdate: IEvent = body;
+    try {
+      const updateDoc = await Event.findByIdAndUpdate(
+        id,
+        {
+          $set: eventToUpdate,
+        },
+        { new: true, runValidators: true, useFindAndModify: false }
+      );
+      if (updateDoc) return res.status(200).send(updateDoc);
+      res
+        .status(400)
+        .json({ messge: "Event to update not found, wrong or invalid ID" });
+    } catch (error) {
+      return res.status(400).json({ error: "MISSING REQUIRED FIELD" });
+    }
   }
-});
+);
 
 // DELETE EVENT
 router.delete("/:id", checkIdValid, checkErrors, async (_, res) => {
