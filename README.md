@@ -19,3 +19,11 @@ The `package.json` contain 3 script
 - test start the server and use database `exam_test`
 
 - build => transcompilation TS in JS
+
+### HTTP REQUEST
+
+| Method | Endpoint          | Description                               |
+| ------ | ----------------- | ----------------------------------------- |
+| GET    | `/api/v1/events`     | Retrieve the complete list of events  |
+| GET    | `/api/v1//event`     | Retrieve the complete list of tickets  |
+| GET    | `/api/v1/events/:id` | Retrieve a specific events based on ID |
