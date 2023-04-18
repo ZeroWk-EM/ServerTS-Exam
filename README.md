@@ -1,4 +1,4 @@
-# [EVENT] - EXAM
+# [TICKETZERO] - DOCUMENTATION
 
 1. Install dependance with `npm i`
 2. Create .env (or use existing) file and fill the value
