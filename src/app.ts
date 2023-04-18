@@ -13,10 +13,12 @@ app.get("/", (_, res) => {
 });
 
 // IMPORT RESOURCES
-import authRoutes from "./routes/auth.routes";
+import ticketRoute from "./routes/ticket.routes"
+import eventRoute from "./routes/event.routes";
 
 // DEFINE ENDPOINT
-app.use("/v1/auth", authRoutes);
+app.use("/api/v1/events", eventRoute);
+app.use("/api/v1/tickets", ticketRoute);
 
 app.listen(port || 3000, () => {
   console.log(`\x1b[32m[Server] Server Connected on port ${port}\x1b[0m`);

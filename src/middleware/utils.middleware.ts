@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
-import User from "../models/user.model";
-import jwt from "jsonwebtoken";
+import Event from "../models/event.model";
+import Ticket from "../models/ticket.model";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -35,32 +35,30 @@ export const checkErrors = (
   next();
 };
 
-// Check if hava a valid token signature for POST,PUT,DELETE operation
-export const isAuth = async (
-  req: Request,
+export const uniqueEvent = async (
+  { body }: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const authkey = String(req.headers.authorization);
-  // Check if the JWT have same signature
-  const uservalidation = jwt.verify(authkey, secretToken) as { id: string };
-  res.locals.userFinded = await User.findById(uservalidation.id);
-  if (res.locals.userFinded) {
-    return next();
-  } else {
-    return res.status(400).json({ message: "Token not valid" });
+  const event = await Event.findOne({
+    name: body.name,
+    "location.city": body.location.city,
+  });
+  if (event) {
+    return res.status(409).json({ message: "Event is just present" });
   }
+  next();
 };
 
-// Check unique email
-export const uniqueEmail = async (
-  { body: { email } }: Request,
+
+export const uniqueBuyer = async (
+  { body }: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const user = await User.findOne({ email });
-  if (user) {
-    return res.status(409).json({ message: "Email is just present" });
+  const buyer = await Ticket.findOne({owner: body.owner});
+  if (buyer) {
+    return res.status(409).json({ message: "Each user can purchase only one ticket" });
   }
   next();
 };
