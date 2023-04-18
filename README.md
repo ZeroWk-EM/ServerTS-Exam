@@ -72,4 +72,4 @@ The `package.json` contain 3 script
 | buyDate          | `Date`   | when the ticket was bought      | ✅       |
 | obliterationDate | `Date`   | when the ticket was obliterated | ❌       |
 
-**N.B** Each person may only purchase one ticket per event
+**N.B EACH PERSON MAY ONLY PURCHASE ONE TICKET PER EVENT** 
