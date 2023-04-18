@@ -51,8 +51,8 @@ describe("ENDPOINT", () => {
     //
     after(async () => {
       await Event.deleteOne({
-        name: event.name,
-        "location.city": event.location.city,
+        name: newEvent.name,
+        "location.city": newEvent.location.city,
       });
     });
 
