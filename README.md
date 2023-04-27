@@ -10,7 +10,7 @@ MONGO_URL=mongodb://127.0.0.1:27017/ticketZero
 
 ## SCRIPT
 
-The `package.json` contain 3 script
+The `package.json` contain 4 script
 
 - start `=>` start the server and use database `exam_prod`
 
